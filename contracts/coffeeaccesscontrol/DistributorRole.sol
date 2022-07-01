@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.16;
 
 // Import the library 'Roles'
 import "./Roles.sol";
@@ -42,7 +42,7 @@ contract DistributorRole {
     // Define an internal function '_addDistributor' to add this role, called by 'addDistributor'
     function _addDistributor(address account) internal {
         distributors.add(account);
-        emit FarmerAdded(account);
+        emit DistributorAdded(account);
     }
 
     // Define an internal function '_removeDistributor' to remove this role, called by 'removeDistributor'
