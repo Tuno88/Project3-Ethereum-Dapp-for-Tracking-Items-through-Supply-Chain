@@ -27,8 +27,14 @@ App = {
     App.sku = $("#sku").val();
     App.upc = $("#upc").val();
     App.ownerID = $("#ownerID").val();
+    // App.ownerID = "0x6dd56BB3f5870eCf39b4e2fe9c9C12F402C441c8";
     App.originFarmerID = $("#originFarmerID").val();
+    console.log("App.ownerID 1: " + App.ownerID);
+    // App.originFarmerID = "0x96d45dFB1A060D5a42daf8A91220bD198a76e07c";
+    console.log("App.originFarmerID 1: " + $("#originFarmerID").val());
+
     App.originFarmName = $("#originFarmName").val();
+
     App.originFarmInformation = $("#originFarmInformation").val();
     App.originFarmLatitude = $("#originFarmLatitude").val();
     App.originFarmLongitude = $("#originFarmLongitude").val();
@@ -167,6 +173,9 @@ App = {
     event.preventDefault();
     var processId = parseInt($(event.target).data("id"));
 
+    App.originFarmerID = $("#originFarmerID").val();
+    console.log("App.originFarmerID 1" + $("#originFarmerID").val());
+    // App.originFarmerID = "0x96d45dFB1A060D5a42daf8A91220bD198a76e07c";
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
         return instance.harvestItem(
@@ -176,7 +185,8 @@ App = {
           App.originFarmInformation,
           App.originFarmLatitude,
           App.originFarmLongitude,
-          App.productNotes
+          App.productNotes,
+          { from: App.originFarmerID }
         );
       })
       .then(function (result) {
@@ -194,6 +204,7 @@ App = {
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
+        console.log("process item - metamask id: " + App.metamaskAccountID);
         return instance.processItem(App.upc, { from: App.metamaskAccountID });
       })
       .then(function (result) {
@@ -228,7 +239,7 @@ App = {
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
-        const productPrice = web3.toWei(1, "ether");
+        const productPrice = web3.utils.toWei(1, "ether");
         console.log("productPrice", productPrice);
         return instance.sellItem(App.upc, App.productPrice, {
           from: App.metamaskAccountID,
