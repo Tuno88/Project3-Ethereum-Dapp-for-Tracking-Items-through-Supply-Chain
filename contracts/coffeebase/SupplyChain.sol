@@ -31,14 +31,14 @@ contract SupplyChain is
 
     // Define enum 'State' with the following values:
     enum State {
-        Harvested, // 0
-        Processed, // 1
-        Packed, // 2
-        ForSale, // 3
-        Sold, // 4
-        Shipped, // 5
-        Received, // 6
-        Purchased // 7
+        Harvested,
+        Processed,
+        Packed,
+        ForSale,
+        Sold,
+        Shipped,
+        Received,
+        Purchased
     }
 
     State constant defaultState = State.Harvested;
